@@ -10,6 +10,7 @@ namespace FourthTask
     {
         public long ruble;
         public int kopec;
+        public decimal price;
 
         public Money() { }
         public Money(long ruble, int kopec)
@@ -38,6 +39,28 @@ namespace FourthTask
 
             return resultMoney;
         }
+
+        public Money Multiply(int count)
+        {
+            Money resultMoney = new Money();
+            long resultRuble = this.ruble * count;
+            int resultKopec = this.kopec * count;
+            if (resultKopec >= 100)
+            {
+                resultRuble += resultKopec / 100;
+                resultKopec = resultKopec % 100;
+            }
+            if (resultKopec >= 1000)
+            {
+                resultRuble += (resultKopec / 1000)*1000;
+                resultKopec = resultKopec % 1000;
+            }
+            resultMoney.ruble = resultRuble;
+            resultMoney.kopec = resultKopec;
+
+            return resultMoney;
+        }
+
         public Money Sub(Money secondMoney)
         {
             Money resultMoney = new Money();
