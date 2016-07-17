@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace FourthTask
 {
+    public enum TriangleType { Rectangular, RectangularGeron, Isosceles, Geron};
     class Triangle
     {
+        public TriangleType type;
         public double aSide;
         public double bSide;
         public double cSide;
 
-        public Triangle(double a, double b, double c)
+        public Triangle(TriangleType type, double a, double b, double c)
         {
+            this.type = type;
             this.aSide = a;
             this.bSide = b;
             this.cSide = c;
@@ -45,10 +48,30 @@ namespace FourthTask
 
         public double FindSquare()
         {
-            double square = 1;
-            double halfPerimetr = FindHalfPerimetr();
-            square = Math.Sqrt(halfPerimetr * (halfPerimetr - this.aSide) * (halfPerimetr - this.bSide) * (halfPerimetr - this.cSide));
-            return square;
+            if (this.type.Equals(TriangleType.Geron))
+            {
+                double square = 1;
+                double halfPerimetr = FindHalfPerimetr();
+                square = Math.Sqrt(halfPerimetr * (halfPerimetr - this.aSide) * (halfPerimetr - this.bSide) * (halfPerimetr - this.cSide));
+                return square;
+            }
+            else
+            {
+                return 0.0; //ADD Exeption
+            }
+        }
+        public double FindSquare(double height)
+        {
+            if (this.type.Equals(TriangleType.Isosceles))
+            {
+                double square = 1;
+                square = 0.5 * this.aSide * height;
+                return square;
+            }
+            else
+            {
+                return 0.0; //ADD Exeption
+            }
         }
 
     }
